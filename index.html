@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Clip Tiktik Không Logo</title>
+    <link rel="icon" type="image/png" href="tiktok-download.png" />
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./simple-notify/simple-notify.min.css" />
+    <link rel="stylesheet" href="./fontawesome/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container" style="height: 90vh;">
+        <h1 class="text-center m-4">Download clip Tiktok không Logo</h1>
+        <!-- Button -->
+        <div class="row d-flex justify-content-center my-2">
+            <div class="col-lg-9">
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control" id="url" placeholder="Nhập url..." autocomplete="off">
+                    <!-- <button class="btn btn-primary" type="button" id="submit" onclick="handleClick()">Tìm</button> -->
+                    <button class="btn btn-primary btn-icon-split" title="Download" onclick="handleClick()"
+                        id="download-btn">
+                        <span class="icon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <span class="text">Tìm</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- <div class="col-lg-3 text-center">
+                <button class="btn btn-success btn-icon-split" title="Download" onclick="handleDownload()"
+                    id="download-btn">
+                    <span class="icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </span>
+                    <span class="text">Download</span>
+                </button>
+            </div> -->
+        </div>
+
+        <!-- Video -->
+        <div class="text-center" id="video">
+            <!-- <video controls id="video">
+                <source
+                    src="https://v16m-default.tiktokcdn-us.com/a4c4dfd20cf0c0ae7d5046c53fcbaf58/636bb543/video/tos/useast5/tos-useast5-ve-0068c001-tx/5aa3806efc534f4cb7290647a9cb9048/?a=0&amp;ch=0&amp;cr=0&amp;dr=0&amp;lr=all&amp;cd=0%7C0%7C0%7C0&amp;cv=1&amp;br=1444&amp;bt=722&amp;cs=0&amp;ds=6&amp;ft=_G6uMBBkqXxmo0PNnTpBkVQLy35J_KJ&amp;mime_type=video_mp4&amp;qs=0&amp;rc=aGVmNDU4Nmc6ZmVlPDw6PEBpanRlcTk6ZjdzZzMzZzczNEA0MF8zYWBgNmExLmAxNTBiYSM1ZzRxcjRfc2dgLS1kMS9zcw%3D%3D&amp;l=202211090812023127993881A2CA013CDC"
+                    type="video/mp4">
+            </video> -->
+        </div>
+    </div>
+
+    <footer>
+        <p class="text-center text-white">Copyright &copy; 2022 by TrongLe</p>
+    </footer>
+
+    <script src="./simple-notify/simple-notify.min.js"></script>
+    <script>
+        function fetchVideoData(urlA) {
+            const data = null;
+
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            // xhr.onreadystatechange = () => {
+            //     // In local files, status is 0 upon success in Mozilla Firefox
+            //     if (xhr.readyState === XMLHttpRequest.DONE) {
+            //         const status = xhr.status;
+            //         if (status === 0 || (status >= 200 && status < 400)) {
+            //             var video_obj = JSON.parse(xhr.responseText);
+            //             var video_link = video_obj['video'][0];
+
+            //             console.log(video_link);
+            //             return video_link;
+            //         } else {
+            //             console.log('Có lỗi xãy ra!')
+            //         }
+            //     }
+            // };
+
+            // Default
+            // xhr.addEventListener("readystatechange", function () {
+            //     if (xhr.readyState === xhr.DONE) {
+            //         console.log(xhr.responseText);
+            //     }
+            // });
+
+            var url = 'https://tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com/vid/index?url=';
+            var link_video = urlA;
+
+            xhr.open("GET", url + link_video, false);
+            xhr.setRequestHeader("X-RapidAPI-Key", "595c0e6165msh9b6076f3f0d199dp1ef7fcjsnd70314a7b6d3");
+            xhr.setRequestHeader("X-RapidAPI-Host", "tiktok-downloader-download-tiktok-videos-without-watermark.p.rapidapi.com");
+
+            try {
+                xhr.send(data);
+            } catch (err) {
+                console.log('lỗi')
+            }
+            var video_obj = JSON.parse(xhr.responseText);
+            if (video_obj === null) {
+                createNotify('warning', 'Không tìm thấy video! Vui lòng thử lại!');
+                return false;
+            }
+            var video_link = video_obj['video'][0];
+            return video_link;
+        }
+
+        function isValidURL(string) {
+            var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+            return (res !== null)
+        };
+
+        function handleClick() {
+            var url = document.getElementById('url').value;
+            var video = document.getElementById('video');
+
+            const isURL = isValidURL(url);
+            if (!isURL) {
+                createNotify('warning', 'Địa chỉ không hợp lệ');
+                return false;
+            }
+
+            if (video.hasChildNodes()) {
+                video.innerHTML = '';
+            }
+
+            var link = fetchVideoData(url);
+
+            var video_play = document.createElement('video');
+            video_play.setAttribute('controls', '')
+
+            var source = document.createElement('source');
+            source.src = link;
+            source.type = 'video/mp4';
+            video_play.appendChild(source);
+            video.appendChild(video_play);
+        }
+
+        function handleDownload() {
+            var video = document.getElementById('video');
+            if (!video.hasChildNodes()) {
+                createNotify('warning', 'Chưa có video');
+                return false;
+            }
+            var video_link = video.childNodes[0]['attributes'][0]['value'];
+
+            const date = new Date().toISOString().slice(0, 10);
+            download(video_link, "video" + date + ".mp4");
+        }
+
+        function download(dataurl, filename) {
+            // const link = document.createElement("a");
+            // link.href = dataurl;
+            // link.target = '_blank';
+            // link.download = filename;
+            // link.click();
+
+            var link = document.createElement('a');
+            link.href = dataurl;
+            link.target = '_blank';
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function createNotify(status, text) {
+            new Notify({
+                status: status,
+                title: 'Warning',
+                text: text,
+                autoclose: true,
+                autotimeout: 2000,
+                position: 'right top'
+            })
+        };
+    </script>
+</body>
+
+</html>
